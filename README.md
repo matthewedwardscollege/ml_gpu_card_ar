@@ -6,7 +6,7 @@
 
 The following link will allow you to use the ML GPU CardAR program in your browser. (All processing involving video input is done locally on your own computer.)
 
-<a href="https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/" target="_blank">https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/</a>
+https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/
 
 ##About ML GPU CardAR
 
