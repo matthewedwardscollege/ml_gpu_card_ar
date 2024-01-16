@@ -2,6 +2,14 @@
 
 <p align="center" width="100%"><img width="33.33%" src="https://github.com/matthewedwardscollege/ml_gpu_card_ar/blob/main/ml_gpu_card_ar.gif"></p>
 
+##Try out ML GPU CardAR
+
+The following link will allow you to use the ML GPU CardAR program in your browser. (All processing involving video input is done locally on your own computer.)
+
+https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/
+
+##About ML GPU CardAR
+
 I (Matthew Edwards) created this GitHub repository to demonstrate the program I described in my transfer application essay. This is the revised program that I described in the essay. I thought that it would make sense to provide evidence that this is a real project that I actually created. The source code of this project references a few open source JavaScript libraries including: TensorFlow https://www.tensorflow.org/, Teachable Machine https://teachablemachine.withgoogle.com/, and GLFX https://evanw.github.io/glfx.js/. While I used TensorFlow and Teachable Machine to train the neural network in this project that recognizes drawings, I created the training data and trained the neural network on my own hardware, and the weights.bin file was created specifically for this project. The drawings in the training data were produced by more than one person to account for individual differences in drawing styles. While Teachable Machine has the ability to classify objects in an image, as of writing this, Teachable Machine currently does not have the ability to create neural networks which provide bounding boxes for classified objects. The way I was able to get a model made with Teachable Machine to find the bounding box of an object in an image in addition to classifying objects was by using a combination of existing algorithms I called SFFA (Sobel Flood Fill Algorithm) in my original CardAR project. It is a combination of a GPU accelerated Sobel edge detection algorithm and a span filling flood fill algorithm.
 
 Originally, in the previous version of this project https://github.com/matthewedwardscollege/card_ar, the program would take a text input written on a card and output an image. However, this version takes a simple drawing such as, a drawing of a cat, a drawing of a house, or a drawing of a happy face, and outputs a real image of what was drawn on the card. Previously, CardAR only used 2d rotation based on an approximation that averaged the angles found with arctan2 of each line segment between the 4 corner points of the card. The problem with this, is that if you think about a 3D coordinate system relative to your monitor, where x is the horizontal axis, y is the vertical axis, and z is going towards or away from your screen, it is possible to rotate a card in 3D space so that two adjacent corners of the card are both further away in the z direction than the other two adjacent corners. This results in a card, which as it exists in real 3D space, is a rectangle where opposite sides are of equal length which appears as an uneven quadrangle where opposite sides are not of equal length when it is projected onto the 2D screen of a computer. While it is possible to approximate this with a 2D rotation, much better results can be achieved using a projective transformation known as homography. GLFX is an open source JavaScript library that contains several GPU accelerated image effects including 3D perspective transformations. However, this is dependent on the corner finding algorithm accurately locating the corners of the card, which I have improved to be more accurate in this version of CardAR, although, I believe that it may still be possible to improve its accuracy.
@@ -14,13 +22,13 @@ The old version of CardAR also used multiple processes in order to avoid lag. Ho
 
 One remaining issue with this program that could be improved upon is the performance of the neural network used to classify the drawing on the card. Although Tensorflow is GPU accelerated, neural networks are generally not very computationally efficient. Because of this, the neural network is only called once every 500 milliseconds, and to combat classification inconsistency, the neural network contains a “neutral” classification (which was trained on random unrelated objects) which is ignored and instead, the program will default to the last non-neutral classification. This is because, if the neural network does not have 100% accuracy, and during the first step of a 500 millisecond interval, it detects a drawing of a cat, but 500 milliseconds later, it cannot classify the cat from the same card, without defaulting from the neutral classification to the last non-neutral classification, it would take 500 milliseconds before this could be corrected, which is very noticeable to the user.
 
-# ML Output
+## ML Output
 
 <p align="center" width="100%"><img width="33.33%" src="https://github.com/matthewedwardscollege/ml_gpu_card_ar/blob/main/ml_output.png"></p>
 
 The advanced page of the ML GPU CardAr program displays the live output data from the neural network. (Shown above.)
 
-# Example Cards
+## Example Cards
 
 <p align="center" width="100%"><img width="33.33%" src="https://github.com/matthewedwardscollege/ml_gpu_card_ar/blob/main/example_cards.jpeg"></p>
 
