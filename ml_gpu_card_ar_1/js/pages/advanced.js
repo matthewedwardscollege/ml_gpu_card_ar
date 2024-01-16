@@ -495,7 +495,6 @@ window.addEventListener("DOMContentLoaded", () => {
 						lastI = i;
 						if ( i === 0 ) {
 							startTime = now;
-							gif.render();
 						}
 					}
 					const fromTime = startTime + transitionMs * i;
