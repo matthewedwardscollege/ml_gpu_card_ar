@@ -2,13 +2,13 @@
 
 <p align="center" width="100%"><img width="33.33%" src="https://github.com/matthewedwardscollege/ml_gpu_card_ar/blob/main/ml_gpu_card_ar.gif"></p>
 
-##Try out ML GPU CardAR
+## Try out ML GPU CardAR
 
 The following link will allow you to use the ML GPU CardAR program in your browser. (All processing involving video input is done locally on your own computer.)
 
 https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/
 
-##About ML GPU CardAR
+## About ML GPU CardAR
 
 I (Matthew Edwards) created this GitHub repository to demonstrate the program I described in my transfer application essay. This is the revised program that I described in the essay. I thought that it would make sense to provide evidence that this is a real project that I actually created. The source code of this project references a few open source JavaScript libraries including: TensorFlow https://www.tensorflow.org/, Teachable Machine https://teachablemachine.withgoogle.com/, and GLFX https://evanw.github.io/glfx.js/. While I used TensorFlow and Teachable Machine to train the neural network in this project that recognizes drawings, I created the training data and trained the neural network on my own hardware, and the weights.bin file was created specifically for this project. The drawings in the training data were produced by more than one person to account for individual differences in drawing styles. While Teachable Machine has the ability to classify objects in an image, as of writing this, Teachable Machine currently does not have the ability to create neural networks which provide bounding boxes for classified objects. The way I was able to get a model made with Teachable Machine to find the bounding box of an object in an image in addition to classifying objects was by using a combination of existing algorithms I called SFFA (Sobel Flood Fill Algorithm) in my original CardAR project. It is a combination of a GPU accelerated Sobel edge detection algorithm and a span filling flood fill algorithm.
 
