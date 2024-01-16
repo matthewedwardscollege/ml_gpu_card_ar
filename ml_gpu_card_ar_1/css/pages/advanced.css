@@ -1,0 +1,22 @@
+.advanced-canvas {
+	width: 50%;
+}
+.slider {
+	background-color: rgb(128, 128, 128);
+	width: 48vw;
+	height: 4.8vw;
+	margin: 1vw;
+}
+.slider-bar {
+	background-color: #fff;
+	height: 100%;
+	transition: width 0.5s;
+}
+#advanced-page-content {
+	width: 100%;
+	height: 100%;
+	padding: 1em;
+	padding-top: 3.5em;
+	box-sizing: border-box;
+	overflow: auto;
+}

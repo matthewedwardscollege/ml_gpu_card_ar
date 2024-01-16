@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ML GPU CardAR</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/pages/start.css">
+	<link rel="stylesheet" href="css/pages/main.css">
+	<link rel="stylesheet" href="css/pages/advanced.css">
+	<script src="js/libs/glfx.js"></script>
+	<script src="js/libs/tf.min.js"></script>
+	<script src="js/libs/teachablemachine-image.min.js"></script>
+	<script src="js/libs/global_constants.js"></script>
+	<script src="js/libs/page_switcher.js"></script>
+	<script src="js/libs/create_canvas.js"></script>
+	<script src="js/libs/create_sobel.js"></script>
+	<script src="js/libs/get_corners.js"></script>
+	<script src="js/pages/start.js"></script>
+	<script src="js/pages/main.js"></script>
+	<script src="js/pages/advanced.js"></script>
+</head>
+<body>
+	<div id="pages-container">
+		<!--Used for the page switching animation.-->
+		<div id="page-slider">
+			<!--Here the program will request webcam permissions.-->
+			<div class="page" data-pagename="start">
+				<div id="start-btn-wrapper">
+					<span id="start-btn">Click to Start</span>
+				</div>
+				<a id="start-page-created-by" href="https://github.com/matthewedwardscollege/ml_gpu_card_ar" target="_blank">Created by Matthew Edwards</a>
+			</div>
+			<!--This is the main view that only shows the algorithm output.-->
+			<div class="page" data-pagename="main">
+				<canvas id="main-canvas"></canvas>
+				<div id="open-advanced-btn" class="page-switch-btn">Advanced</div>
+			</div>
+			<!--The advanced page shows multiple views that show how the algorithm works underneath.-->
+			<div class="page" data-pagename="advanced">
+				<div id="open-main-btn" class="page-switch-btn">Main</div>
+				<div id="advanced-page-content"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
