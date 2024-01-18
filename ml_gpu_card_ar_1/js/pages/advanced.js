@@ -123,16 +123,31 @@ window.addEventListener("DOMContentLoaded", () => {
 					sobelCtx.drawImage(sobel.canvas, 0, 0);
 				}
 			})();
+			const toLinear = s => {
+				if ( s <= 0.03928 ) {
+					return s / 12.92;
+				} else {
+					return Math.pow((s + 0.055) / 1.055, 2.4);
+				}
+			};
+			const toStandard = s => {
+				if ( s <= 0.00304 ) {
+					return 19.92 * s;
+				} else {
+					return 1.055 * Math.pow(s, 1.0 / 2.4) - 0.055;
+				}
+			};
 			//Slow loop: cycles every 500ms to update currentBrightness
 			(async () => {
 				while ( true ) {
-					await new Promise(resolve => setTimeout(resolve));
+					await new Promise(resolve => setTimeout(resolve, 500));
 					const {data} = rawCtx.getImageData(0, 0, width, height);
 					currentBrightness = 0;
 					for ( let i4 = 0, l = 4 * width * height; i4 < l; i4 += 4 ) {
-						currentBrightness += 0.2126 * data[i4] + 0.7152 * data[i4 + 1] + 0.0722 * data[i4 + 2];
+						currentBrightness += 0.2126 * toLinear(data[i4] / 255) + 0.7152 * toLinear(data[i4 + 1] / 255) + 0.0722 * toLinear(data[i4 + 2] / 255);
 					}
-					currentBrightness /= 255 * 4 * width * height;
+					currentBrightness /= 4 * width * height;
+					currentBrightness = toStandard(currentBrightness);
 				}
 			})();
 			//Most modern CPUs are little endian, but it is better to check.
