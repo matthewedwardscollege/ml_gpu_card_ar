@@ -109,15 +109,30 @@ window.addEventListener("DOMContentLoaded", () => {
 			pageSwitcher.pageControls.main.canvas = outputCanvas;
 			createSection("Output", outputCanvas);
 			const sobel = createSobel(width, height);
+			const correctBrightness = createCorrectBrightness(width, height);
+			let currentBrightness = 1;
 			//Fast loop: cycles at the screen refresh rate, only GPU operations.
 			(async () => {
 				while ( true ) {
 					await new Promise(resolve => requestAnimationFrame(resolve));
 					rawCtx.drawImage(rawVideo, 0, 0);
-					grayscaleCtx.filter = "grayscale(100%)";
+					correctBrightness.correctBrightness(rawCanvas, 0.5 / currentBrightness);
+					rawCtx.drawImage(correctBrightness.canvas, 0, 0);
 					grayscaleCtx.drawImage(rawCanvas, 0, 0);
 					sobel.sobel(grayscaleCanvas);
 					sobelCtx.drawImage(sobel.canvas, 0, 0);
+				}
+			})();
+			//Slow loop: cycles every 500ms to update currentBrightness
+			(async () => {
+				while ( true ) {
+					await new Promise(resolve => setTimeout(resolve));
+					const {data} = rawCtx.getImageData(0, 0, width, height);
+					currentBrightness = 0;
+					for ( let i4 = 0, l = 4 * width * height; i4 < l; i4 += 4 ) {
+						currentBrightness += 0.2126 * data[i4] + 0.7152 * data[i4 + 1] + 0.0722 * data[i4 + 2];
+					}
+					currentBrightness /= 255 * 4 * width * height;
 				}
 			})();
 			//Most modern CPUs are little endian, but it is better to check.
@@ -427,6 +442,8 @@ window.addEventListener("DOMContentLoaded", () => {
 				while ( true ) {
 					await new Promise(resolve => requestAnimationFrame(resolve));
 					outputCtx.drawImage(rawVideo, 0, 0);
+					correctBrightness.correctBrightness(outputCanvas, 0.5 / currentBrightness);
+					outputCtx.drawImage(correctBrightness.canvas, 0, 0);
 					if ( corners === null || bestClassName === "neutral" ) {
 						continue;
 					}
