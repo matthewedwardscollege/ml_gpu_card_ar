@@ -118,6 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
 					rawCtx.drawImage(rawVideo, 0, 0);
 					correctBrightness.correctBrightness(rawCanvas, 0.5 / currentBrightness);
 					rawCtx.drawImage(correctBrightness.canvas, 0, 0);
+					grayscaleCtx.filter = "grayscale(100%)";
 					grayscaleCtx.drawImage(rawCanvas, 0, 0);
 					sobel.sobel(grayscaleCanvas);
 					sobelCtx.drawImage(sobel.canvas, 0, 0);
