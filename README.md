@@ -8,7 +8,7 @@ The following link will allow you to use the ML GPU CardAR program in your brows
 
 https://matthewedwardscollege.github.io/ml_gpu_card_ar/ml_gpu_card_ar_1/
 
-Unlike the previous version of CardAR, this version uses automatic GPU accelerated brightness correction based on the linear RGB color space as defined by W3C https://www.w3.org/Graphics/Color/sRGB.html.
+Unlike the previous version of CardAR, this version uses automatic GPU accelerated brightness correction based on the linear RGB color space as defined by the W3C specification https://www.w3.org/Graphics/Color/sRGB.html.
 
 ## About ML GPU CardAR
 
